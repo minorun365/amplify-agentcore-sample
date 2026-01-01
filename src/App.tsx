@@ -122,9 +122,14 @@ function App() {
     setLoading(false);
   };
 
-  // チャットUI（メッセージ表示エリア＋入力フォーム）
+  // チャットUI
   return (
     <div className="container">
+      <header className="header">
+        <h1 className="title">フルサーバーレスなAIエージェントアプリ</h1>
+        <p className="subtitle">AmplifyとAgentCoreで構築しています</p>
+      </header>
+
       <div className="message-area">
         <div className="message-container">
           {messages.map(msg => (

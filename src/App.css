@@ -1,5 +1,16 @@
 /* チャットアプリ全体のスタイル */
 
+/* タイトルバー（フォームと同じテイスト） */
+.header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  text-align: center;
+  padding: 16px 24px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+.title { font-size: 1.25rem; font-weight: 600; margin: 0; }
+.subtitle { font-size: 0.85rem; opacity: 0.9; margin: 4px 0 0; }
+
 /* コンテナ */
 .container {
   display: flex;
