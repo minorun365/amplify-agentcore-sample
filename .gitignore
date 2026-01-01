@@ -27,3 +27,6 @@ dist-ssr
 .amplify
 amplify_outputs*
 amplifyconfiguration*
+
+# AgentCore
+/Users/mi-onda/git/minorun365/amplify-agentcore-sample/agent/.bedrock_agentcore.yaml
