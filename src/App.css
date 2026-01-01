@@ -1,42 +1,98 @@
-#root {
-  max-width: 1280px;
+/* チャットアプリ全体のスタイル */
+
+/* コンテナ */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background: #fafbfc;
+}
+
+/* メッセージ表示エリア */
+.message-area {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-container {
+  width: 100%;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+/* メッセージ行 */
+.message-row {
+  display: flex;
+  margin-bottom: 12px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.message-row.user { justify-content: flex-end; }
+.message-row.assistant { justify-content: flex-start; }
+
+/* メッセージバブル */
+.bubble {
+  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  line-height: 1.5;
+  font-size: 0.95rem;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.bubble.user {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.25);
+}
+.bubble.assistant {
+  background: #fff;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* 思考中・ツール使用中 */
+.thinking { color: #9ca3af; font-style: italic; }
+.tool-status { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; }
+.tool-status.active { color: #667eea; }
+.tool-status.completed { color: #10b981; }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* 入力フォーム */
+.form-wrapper {
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  padding: 16px 24px;
 }
-
-.card {
-  padding: 2em;
+.form {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
-
-.read-the-docs {
-  color: #888;
+.input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  font-size: 0.95rem;
+  outline: none;
 }
+.input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+.button {
+  padding: 12px 28px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+.button:hover { transform: translateY(-1px); }
+.button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
