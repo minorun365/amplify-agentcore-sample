@@ -1,10 +1,11 @@
+// 必要なパッケージをインポート
 import { useState, useRef, useEffect, type FormEvent } from 'react';
 import { fetchAuthSession } from 'aws-amplify/auth';
 import ReactMarkdown from 'react-markdown';
 import './App.css';
 
-const AGENT_ARN = 'arn:aws:bedrock-agentcore:ap-northeast-1:282048599344:runtime/update_checker5-z2wZOT4cqn';
-const REGION = 'ap-northeast-1';
+// 環境変数から設定を取得
+const AGENT_ARN = import.meta.env.VITE_AGENT_ARN;
 
 // チャットメッセージの型定義
 interface Message {
@@ -16,6 +17,7 @@ interface Message {
   toolName?: string;
 }
 
+// メインのアプリケーションコンポーネント
 function App() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -45,7 +47,7 @@ function App() {
     const accessToken = session.tokens?.accessToken?.toString();
 
     // AgentCore Runtime APIを呼び出し
-    const url = `https://bedrock-agentcore.${REGION}.amazonaws.com/runtimes/${encodeURIComponent(AGENT_ARN)}/invocations?qualifier=DEFAULT`;
+    const url = `https://bedrock-agentcore.ap-northeast-1.amazonaws.com/runtimes/${encodeURIComponent(AGENT_ARN)}/invocations?qualifier=DEFAULT`;
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
@@ -120,26 +122,23 @@ function App() {
     setLoading(false);
   };
 
+  // チャットUI（メッセージ表示エリア＋入力フォーム）
   return (
     <div className="container">
-      {/* メッセージ表示エリア */}
       <div className="message-area">
         <div className="message-container">
           {messages.map(msg => (
             <div key={msg.id} className={`message-row ${msg.role}`}>
               <div className={`bubble ${msg.role}`}>
-                {/* 思考中 */}
                 {msg.role === 'assistant' && !msg.content && !msg.isToolUsing && (
                   <span className="thinking">考え中…</span>
                 )}
-                {/* ツール使用中/完了 */}
                 {msg.isToolUsing && (
                   <span className={`tool-status ${msg.toolCompleted ? 'completed' : 'active'}`}>
                     {msg.toolCompleted ? '✓' : '⏳'} {msg.toolName}
                     {msg.toolCompleted ? 'ツールを利用しました' : 'を利用中...'}
                   </span>
                 )}
-                {/* メッセージ本文（マークダウン対応） */}
                 {msg.content && !msg.isToolUsing && <ReactMarkdown>{msg.content}</ReactMarkdown>}
               </div>
             </div>
@@ -148,7 +147,6 @@ function App() {
         </div>
       </div>
 
-      {/* 入力フォーム */}
       <div className="form-wrapper">
         <form onSubmit={handleSubmit} className="form">
           <input value={input} onChange={e => setInput(e.target.value)} placeholder="メッセージを入力..." disabled={loading} className="input" />

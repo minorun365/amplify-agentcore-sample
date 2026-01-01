@@ -17,7 +17,7 @@ def convert_event(event) -> dict | None:
         if not inner_event:
             return None
 
-        # テキストデルタ
+        # テキスト差分を検知
         content_block_delta = inner_event.get('contentBlockDelta')
         if content_block_delta:
             delta = content_block_delta.get('delta', {})
@@ -25,7 +25,7 @@ def convert_event(event) -> dict | None:
             if text:
                 return {'type': 'text', 'data': text}
 
-        # ツール使用開始
+        # ツール使用開始を検知
         content_block_start = inner_event.get('contentBlockStart')
         if content_block_start:
             start = content_block_start.get('start', {})
@@ -61,4 +61,5 @@ async def invoke_agent(payload, context):
 
 
 # APIサーバーを起動
-app.run()
+if __name__ == "__main__":
+    app.run()
