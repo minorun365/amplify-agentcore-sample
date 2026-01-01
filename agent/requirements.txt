@@ -1,6 +1,11 @@
+# Strands Agents
 botocore
 strands-agents
 strands-agents-tools[rss]
-strands-agents[otel]
+
+# AgentCore SDK
 bedrock-agentcore
+
+# トレース自動計装用
+strands-agents[otel]
 aws-opentelemetry-distro
