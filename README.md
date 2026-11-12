@@ -15,3 +15,7 @@ Amplify Gen2 の画面から、Amazon Bedrock AgentCore Runtime で動くエー�
 3. デプロイが終わったら、画面でアカウントを作って話しかける
 
 手元で画面だけ動かすときは、.env に VITE_AGENT_ARN を書いて npm run dev を打ちます。Runtime は東京リージョン（ap-northeast-1）を前提にしています。
+
+## ライセンス
+
+MIT Licenseです。詳細は [LICENSE](./LICENSE) を参照してください。
